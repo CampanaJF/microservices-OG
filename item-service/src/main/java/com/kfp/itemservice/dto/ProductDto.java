@@ -24,5 +24,4 @@ public class ProductDto {
 
     private LocalDate creationDate;
 
-    private Integer port;
 }

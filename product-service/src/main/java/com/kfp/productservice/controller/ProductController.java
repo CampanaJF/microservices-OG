@@ -29,23 +29,13 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<Product>> list(){
 
-        List<Product> list = productService.findAll()
-                .stream()
-                .peek(product -> product.setPort(port))
-                .toList();
-
-
-        return new ResponseEntity<>(list, HttpStatus.OK);
+        return new ResponseEntity<>(productService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{productId}")
     public ResponseEntity<Product> get(@PathVariable("productId") Long productId){
         try{
-
-            Product product = productService.findById(productId);
-            product.setPort(port);
-
-            return new ResponseEntity<>(product, HttpStatus.OK);
+            return new ResponseEntity<>(productService.findById(productId), HttpStatus.OK);
         }catch(ProductNotFoundException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
         }

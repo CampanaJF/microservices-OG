@@ -34,6 +34,4 @@ public class Product {
     @Column(name = "creation_date")
     private LocalDate creationDate;
 
-    @Transient
-    private Integer port;
 }
