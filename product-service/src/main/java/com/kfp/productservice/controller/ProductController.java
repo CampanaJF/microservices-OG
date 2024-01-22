@@ -3,8 +3,7 @@ package com.kfp.productservice.controller;
 import com.kfp.productservice.exception.ProductNotFoundException;
 import com.kfp.productservice.model.Product;
 import com.kfp.productservice.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,16 +14,12 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-
+@AllArgsConstructor
 @RestController
 @RequestMapping("/products")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
-
-    @Value("${server.port}")
-    private Integer port;
+    private final ProductService productService;
 
     @GetMapping
     public ResponseEntity<List<Product>> list(){
