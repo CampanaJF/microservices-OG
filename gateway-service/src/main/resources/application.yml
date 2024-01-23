@@ -16,12 +16,41 @@ spring:
         locator:
           enabled: true
       routes:
+
         - id: product-msvc
           uri: lb://product-msvc
           predicates:
             - Path=/products/**
+          filters:
+            # - StripPrefix=2
+            - SesameStreet=The Cookie Monster is Here,user,CookieMonster # shortcutFieldOrder() name()
+
         - id: item-msvc
           uri: lb://item-msvc
           predicates:
             - Path=/items/**
+          filters:
+            - AddRequestHeader=token-request, 8761
+            - AddResponseHeader=token-response, 1678
+            - SetResponseHeader=Content-Type, text/plain
+            - AddRequestParameter=name, tony
 
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: DEBUG
+#    reactor.netty.http.client: DEBUG
+
+          #filters:
+            #- StripPrefix=2
+            #- name: Roadmap # has to be factory prefix
+              #args:
+                #message: The Cookie Monster is Here
+                #cookieValue: CookieMonster
+                #cookieName: user
+
+          #predicates:
+            #- Path=/products/**
+            #- Header= token, \d+
+            #- Method= GET,POST
+            #- Query= color
+            #- Cookie= color, lightBlue
