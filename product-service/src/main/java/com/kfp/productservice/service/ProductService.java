@@ -7,5 +7,5 @@ import java.util.List;
 public interface ProductService {
 
     List<Product> findAll();
-    Product findById(Long productId);
+    Product findById(Long productId) throws InterruptedException;
 }

@@ -1,8 +1,12 @@
 package com.kfp.itemservice.controller;
 
+import com.kfp.itemservice.dto.ProductDto;
 import com.kfp.itemservice.model.Item;
 import com.kfp.itemservice.service.ItemService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static java.math.BigDecimal.valueOf;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("items")
 public class ItemController {
+
+    private final Logger logger = LoggerFactory.getLogger(ItemController.class);
+
+    private CircuitBreakerFactory circuitBreakerFactory;
 
     private ItemService itemService;
 
@@ -35,8 +45,25 @@ public class ItemController {
             @PathVariable("itemId") Long itemId,
             @PathVariable("quantity") Integer quantity){
 
-        return new ResponseEntity<>(itemService.findById(itemId, quantity), HttpStatus.OK);
+
+        return circuitBreakerFactory.create("items")
+                .run( () -> ResponseEntity.ok(itemService.findById(itemId, quantity)),
+                        e -> getFallback(itemId, quantity, e));
 
     }
+
+    private ResponseEntity<Item> getFallback(Long itemId, Integer quantity, Throwable e){
+
+        logger.info(e.getMessage());
+
+        ProductDto product = ProductDto.builder()
+                .id(itemId)
+                .price(valueOf(800.00))
+                .name("Mug")
+                .build();
+
+        return ResponseEntity.ok(Item.builder().product(product).quantity(quantity).build());
+    }
+
 
 }
