@@ -22,8 +22,15 @@ spring:
           predicates:
             - Path=/products/**
           filters:
+            - name: CircuitBreaker
+              args:
+                name: products
+                statusCodes: 500
+                fallbackUri: forward:/items/3/quantity/1
             # - StripPrefix=2
             - SesameStreet=The Cookie Monster is Here,user,CookieMonster # shortcutFieldOrder() name()
+
+
 
         - id: item-msvc
           uri: lb://item-msvc
@@ -34,6 +41,28 @@ spring:
             - AddResponseHeader=token-response, 1678
             - SetResponseHeader=Content-Type, text/plain
             - AddRequestParameter=name, tony
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        sliding-window-size: 6
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 20s
+        permitted-number-of-calls-in-half-open-state: 4
+        slow-call-rate-threshold: 50
+        slow-call-duration-threshold: 2s
+    instances:
+      products:
+        base-config: default
+  timelimiter:
+    configs:
+      default:
+        timeout-duration: 2s
+    instances:
+      products:
+        base-config: default
+
 
 #logging:
 #  level:

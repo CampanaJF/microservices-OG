@@ -27,7 +27,7 @@ public class RoadmapGatewayFilterFactory extends AbstractGatewayFilterFactory<Ro
     public GatewayFilter apply(Configuration config) {
         return (exchange, chain) -> {
 
-            logger.info("pre gateway filter factory " + config.message);
+            //logger.info("pre gateway filter factory " + config.message);
 
             return chain.filter(exchange).then(Mono.fromRunnable( () -> {
 
@@ -36,7 +36,7 @@ public class RoadmapGatewayFilterFactory extends AbstractGatewayFilterFactory<Ro
                             .addCookie(ResponseCookie.from(config.cookieName, config.cookieValue).build());
                 });
 
-                logger.info("post gateway filter factory " + config.message);
+                //logger.info("post gateway filter factory " + config.message);
 
 
             }));

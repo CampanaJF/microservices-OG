@@ -19,7 +19,7 @@ public class RoadmapGlobalFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        logger.info("pre filtering");
+        //logger.info("pre filtering");
 
         exchange.getRequest()
                 .mutate()
@@ -27,7 +27,7 @@ public class RoadmapGlobalFilter implements GlobalFilter, Ordered {
 
         return chain.filter(exchange)
                 .then(Mono.fromRunnable( () -> {
-                    logger.info("post filtering");
+                    //logger.info("post filtering");
 
                     exchange.getResponse()
                             .getCookies()
@@ -45,7 +45,7 @@ public class RoadmapGlobalFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return 1;
+        return 100;
     }
 
     // exchange.getResponse().getHeaders().setContentType(MediaType.TEXT_PLAIN);
