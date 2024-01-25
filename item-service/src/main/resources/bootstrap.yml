@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: item-msvc
+  config:
+    import: optional:configserver:http://localhost:8888
+    allowOverride: true
+  profiles:
+    active: dev
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

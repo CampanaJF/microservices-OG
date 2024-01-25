@@ -22,4 +22,26 @@ public class ProductServiceImpl implements ProductService {
     public Product findById(Long productId) {
         return productJpaRepository.findById(productId).orElse(null);
     }
+
+    @Override
+    public void save(Product product) {
+        productJpaRepository.save(product);
+    }
+
+    @Override
+    public void delete(Long id) {
+        productJpaRepository.deleteById(id);
+    }
+
+    @Override
+    public void update(Long productId, Product product) {
+
+        Product toUpdate = findById(productId);
+
+        toUpdate.setName(product.getName());
+        toUpdate.setPrice(product.getPrice());
+        toUpdate.setCreationDate(product.getCreationDate());
+
+        productJpaRepository.save(toUpdate);
+    }
 }

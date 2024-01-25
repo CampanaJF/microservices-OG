@@ -8,4 +8,7 @@ public interface ProductService {
 
     List<Product> findAll();
     Product findById(Long productId) throws InterruptedException;
+    void save(Product product);
+    void delete(Long productId);
+    void update(Long productId, Product product);
 }
