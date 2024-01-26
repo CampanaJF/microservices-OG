@@ -1,6 +1,6 @@
 package com.kfp.productservice.service;
 
-import com.kfp.productservice.model.Product;
+import com.commons.model.Product;
 
 import java.util.List;
 

@@ -1,9 +1,10 @@
-    INSERT INTO products (name, price, creation_date) VALUES('Panasonic', 800, NOW());
-    INSERT INTO products (name, price, creation_date) VALUES('Sony', 700, NOW());
-    INSERT INTO products (name, price, creation_date) VALUES('Apple', 1000, NOW());
-    INSERT INTO products (name, price, creation_date) VALUES('Sony Notebook', 1000, NOW());
-    INSERT INTO products (name, price, creation_date) VALUES('Hewlett Packard', 500, NOW());
-    INSERT INTO products (name, price, creation_date) VALUES('Bianchi', 600, NOW());
-    INSERT INTO products (name, price, creation_date) VALUES('Nike', 100, NOW());
-    INSERT INTO products (name, price, creation_date) VALUES('Adidas', 200, NOW());
-    INSERT INTO products (name, price, creation_date) VALUES('Reebok', 300, NOW());
+insert ignore into products (name, price, creation_date) values
+('Panasonic', 800, NOW()),
+('Sony', 700, NOW()),
+('Apple', 1000, NOW()),
+('Sony Notebook', 1000, NOW()),
+('Hewlett Packard', 500, NOW()),
+('Bianchi', 600, NOW()),
+('Nike', 100, NOW()),
+('Adidas', 200, NOW()),
+('Reebok', 300, NOW());

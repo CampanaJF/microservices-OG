@@ -1,6 +1,6 @@
 package com.kfp.productservice.controller;
 
-import com.kfp.productservice.model.Product;
+import com.commons.model.Product;
 import com.kfp.productservice.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,6 @@
 package com.kfp.productservice.service.implementation;
 
-import com.kfp.productservice.model.Product;
+import com.commons.model.Product;
 import com.kfp.productservice.repository.ProductJpaRepository;
 import com.kfp.productservice.service.ProductService;
 import lombok.AllArgsConstructor;
