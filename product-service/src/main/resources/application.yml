@@ -6,16 +6,6 @@ spring:
     name: product-msvc
   config:
     import: optional:configserver:http://localhost:8888
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/product_msvc
-    username: root
-    password: 11037
-  jpa:
-    hibernate:
-      ddl-auto: create
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQLDialect
 
 eureka:
   instance:

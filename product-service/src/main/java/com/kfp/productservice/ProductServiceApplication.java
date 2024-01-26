@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-@EntityScan("{com.commons.model.Product}")
+@EntityScan("com.commons.model")
 public class ProductServiceApplication {
 
 	public static void main(String[] args) {
