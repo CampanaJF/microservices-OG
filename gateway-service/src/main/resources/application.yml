@@ -5,7 +5,14 @@ eureka:
 server:
   port: 8080
 
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
 spring:
+  zipkin:
+    base_url: http://localhost:9411
   application:
     name: gateway-msvc
   config:

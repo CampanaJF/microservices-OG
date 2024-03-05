@@ -1,3 +1,7 @@
+spring:
+  zipkin:
+    base_url: http://localhost:9411
+
 eureka:
   instance:
     host-name: localhost
@@ -25,6 +29,11 @@ resilience4j:
     instances:
       items:
         base-config: default
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
 
 logging:
   pattern:
